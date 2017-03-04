@@ -1,3 +1,5 @@
+alert("20")
+
 //Variables for storing URL parameter values, if URL parameter values not given, the default 
 // values will be used.
 var matrix_size = 10;
@@ -79,6 +81,9 @@ function GenerateTableContent(){
 
 		// c starts with zero, since edges just show numbers participating in multiplications.
      	 for (c = 0; c <= matrix_size; ++c) { 
+     	 
+     	    var style = 'regular';
+     	    var value = Number( c * r ).toString(baseToNumber[matrix_base]) 
      	    
      	    // tooltipValue is stored as title of the cell, later will be retrieved 
      	    // to display in cell's tooltip
@@ -87,29 +92,27 @@ function GenerateTableContent(){
         	if (c==0 || r==0 || c == r){ // bold font and blue color for edges and diameter
            		
            		//Values on edges are just showing numbers, diameter shows multiplication 
-           		// c + r means either c or r which is not zero.
+           		// when reach c + r  either r or c are zero, their sum equals to the c or r.
            		value =  Number((c * r) != 0 ?  c * r : c + r).toString(baseToNumber[matrix_base]);
            		
            		if (value == 0){ // just cell[0,0] has a zero value
               		value = "";
            		}				
-           		output += "<td title = '" + tooltipValue + "' style='width:40px' "+
-           		          "bgcolor='#2ECCFA' ><center>  <font size='4' ><b> " + value 
-           		        + "</b></center></font></td>"; // write columns
+				style = 'diameter';
 
 
 			} else{
 			
-				var color = '#ffffff'; //regular color: white
 				if (c == 1 || r == 1){ // Prime values can just appear in edges.
-				    if (IsPrime(c*r)) color = '#ff9999'; // color for prime
+				    if (IsPrime(c*r)) style = 'prime'; // color for prime
 				}
-				
-           		output += "<td title = '" + tooltipValue + "' style='width:40px' bgcolor='"
-           		       + color +"' ><center> <font size='4'>" 
-           			   + Number( c * r ).toString(baseToNumber[matrix_base]) + 
-           			   "</center></font></td>"; // write columns
+
         	}
+        	
+           	output += "<td title = '" + tooltipValue + "' class='" + style +"' >" 
+           		   + value + "</td>"; // write columns        	
+        	
+        	
         	if (c == matrix_size)
             	break; // stop column generation when (n)th interval is reached
         	}
@@ -161,7 +164,8 @@ if ($.urlParam('matrix_size') != null){
  matrix_size = $.urlParam('matrix_size');
  }
 if ($.urlParam('matrix_base') != null){
- matrix_base = $.urlParam('matrix_base');
+// When given value is a combination of lowercase and uppercase letters
+ matrix_base = $.urlParam('matrix_base').toLowerCase(); 
  }
  
 //If the given URL parameter values are valid according to question constraints, table will be generated.
