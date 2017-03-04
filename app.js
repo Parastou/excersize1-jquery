@@ -1,4 +1,3 @@
-alert("20")
 
 //Variables for storing URL parameter values, if URL parameter values not given, the default 
 // values will be used.
