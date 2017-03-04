@@ -1,0 +1,48 @@
+.tooltip {
+	display:none;
+	position:absolute;
+	border:1px solid #ffeb99;
+	background-color:#ffeb99;
+	border-radius:5px;
+	padding:10px;
+	color:#000000;
+	font-size:12px Arial;
+}
+td{
+ width:40px;
+ text-align: center;
+ font-size: 18px;
+  color:black;
+
+}
+
+td.diameter{
+ background:#2ECCFA;
+ font-weight:bold;
+ 
+}
+
+td.regular {
+ background:#FFFFFF;
+ font-weight:regular;
+ 
+}
+
+td.prime {
+ background:#ff9999;
+ font-size: 18px;
+ font-weight:regular;
+ 
+}
+
+header {
+	text-align: center;	
+}
+
+h1, p {
+	color: #2ECCFA;
+}
+
+p {
+	font-size: 14pt;	
+}
